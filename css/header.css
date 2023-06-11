@@ -1,0 +1,100 @@
+/* Style the header with a grey background and some padding */
+/*.kepala {
+  background-color: white;
+  padding: ;
+  overflow: hidden;
+}
+*/
+.header {
+  overflow: hidden;
+  background-color: skyblue;
+  padding: 20px 10px;
+}
+
+.header button {
+  float: left;
+}
+
+/* Style the header links */
+.header a {
+  float: left;
+  color: black;
+  margin-left: auto;
+  text-align: center;
+  padding: 33px;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 25px;
+  border-radius: 4px;
+}
+
+/* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+#name {
+  font-size: 25px;
+  font-weight: bold;
+
+}
+
+.header img {
+  float: left;
+}
+
+
+
+/*/*search engine*/
+/*#tooplate_search { 
+  float: right; 
+  margin-top: 28px; 
+  width: 224px; 
+  height: 20px; 
+  bor: 1px;
+  padding: 4px; 
+  background: url(../images/tooplate_search.png) no-repeat; 
+}
+
+#tooplate_search form {
+  width: 300px;
+  height: 44px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#tooplate_search .txt_field {
+  float: left;
+  display: block;
+  height: 20px;
+  line-height: 20px;
+  width: 180px;
+  color: #bcb29c;
+  font-size: 12px;
+  padding: 0 5px;
+  font-variant: normal;
+  border: none; 
+  background: none;
+}
+
+#tooplate_search .sub_btn {
+  float: right;
+ /* display: block;
+  height: 20px;
+  width: 30px;
+  cursor: pointer;
+  border: 0;
+  background-image: search.png;
+  background: none; */
+/*/
+
+/* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+@media screen and (max-width: 500px) {
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .header-right {
+    float: none;
+  }
+}
