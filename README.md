@@ -1,5 +1,7 @@
 # Kasir-Sederhana-byWZ
 
+Berikut merupakan aplikasi kasir berbasis web dalam bentuk demo. Kedepannya akan dilakukan beberapa update pada aplikasi ini
+
 Username = admin
 password = admin
 
