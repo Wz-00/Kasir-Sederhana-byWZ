@@ -16,7 +16,7 @@ function query($query)
     return $rows;
 }
 
-function edit($edit)
+function edit_produk($edit)
 {
     global $conn;
 
@@ -30,6 +30,21 @@ function edit($edit)
     //query insert data
 
     $query = "UPDATE produk SET nama_barang='$nama_barang', stok='$stok', harga_jual='$harga_jual', harga_beli='$harga_beli' WHERE id_barang='$id_barang'";
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
+
+function edit_kategori($editK)
+{
+    global $conn;
+
+    // ambil data dari form edit kategori
+    $id_kategori = $editK["id_kategori"];
+    $nama_kategori = $editK["nama_kategori"];
+
+
+    $query = "UPDATE kategori SET nama_kategori='$nama_kategori', tanggal_input= NOW() WHERE id_kategori='$id_kategori'";
     mysqli_query($conn, $query);
 
     return mysqli_affected_rows($conn);
@@ -69,6 +84,17 @@ function add_produk($add_produk)
     }
 }
 
+function add_kategori($add_kategori)
+{
+    global $conn;
+    // ambil data dari form insert
+    $nama_kategori = $add_kategori["nama_kategori"];
+
+    $query = "INSERT INTO kategori (nama_kategori, tanggal_input) values ('$nama_kategori', now())";
+    mysqli_query($conn, $query);
+
+    return mysqli_affected_rows($conn);
+}
 
 function getProduk()
 {
@@ -183,4 +209,24 @@ function hitungTotalHarga()
 
     return $row['total_harga'];
 }
+
+// Fungsi untuk mengupdate stok produk setelah transaksi pembelian
+function kurangiStokBarang()
+{
+    global $conn;
+
+    $query = "SELECT id_barang, jumlah FROM kasir";
+    $result = mysqli_query($conn, $query);
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $id_barang = $row['id_barang'];
+        $jumlah = $row['jumlah'];
+
+        $query_update_stok = "UPDATE produk SET stok = stok - $jumlah WHERE id_barang = '$id_barang'";
+        mysqli_query($conn, $query_update_stok);
+    }
+}
+
+
+
 ?>
