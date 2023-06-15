@@ -15,10 +15,11 @@ if (isset($_POST['input_barang'])) {
     $total = $harga_jual * $jumlah;
 
     inputBarangKasir($id_barang, $jumlah, $total);
+
 }
 
 // Proses pembayaran
-if (isset($_POST['beli'])) {
+if (isset($_POST['bayar'])) {
     $bayar = $_POST['bayar'];
 
     // Validasi input adalah angka
@@ -29,6 +30,7 @@ if (isset($_POST['beli'])) {
             if ($kembalian >= 0) {
                 // Masukkan data ke tabel nota
                 masukkanDataNota();
+                kurangiStokBarang(); // Kurangi stok barang
                 clearDataKasir(); // Hapus data dari tabel kasir
                 echo "<script>alert('Kembalian: Rp " . number_format($kembalian, 2, ",", ".") . "');</script>";
             } else {
@@ -44,6 +46,7 @@ if (isset($_POST['beli'])) {
 // Proses menghapus data di tabel kasir
 if (isset($_POST["clear"])) {
     clearDataKasir();
+
     echo '<script>
     alert("Data berhasil dihapus");
     </script>';
