@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2023 at 12:36 PM
+-- Generation Time: Jun 15, 2023 at 07:39 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -64,10 +64,23 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`, `tanggal_input`) VALUES
-('K001', 'ATK', '2023-05-29'),
+('K001', 'Alat Tulis', '2023-06-15'),
 ('K002', 'Snack', '2023-05-29'),
 ('K003', 'Makanan Berat', '2023-05-29'),
-('K004', 'Minuman', '2023-05-29');
+('K004', 'Minuman', '2023-05-29'),
+('K005', 'Novel', '2023-06-15');
+
+--
+-- Triggers `kategori`
+--
+DELIMITER $$
+CREATE TRIGGER `trg_before_insert_kategori` BEFORE INSERT ON `kategori` FOR EACH ROW BEGIN
+  DECLARE max_id INT(3);
+  SET max_id = (SELECT MAX(CAST(SUBSTRING(`id_kategori`, 2) AS UNSIGNED)) FROM `kategori`);
+  SET NEW.`id_kategori` = CONCAT('K', LPAD(COALESCE(max_id + 1, 1), 3, '0'));
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +121,14 @@ CREATE TABLE `nota` (
 
 INSERT INTO `nota` (`id_nota`, `id_barang`, `jumlah`, `total`, `tgl_input`) VALUES
 ('N001', 'B002', 1, 4000, '2023-06-11'),
-('N002', 'B001', 2, 6000, '2023-06-11');
+('N002', 'B001', 2, 6000, '2023-06-11'),
+('N003', 'B006', 2, 20000, '2023-06-12'),
+('N004', 'B001', 1, 3000, '2023-06-12'),
+('N005', 'B001', 10, 30000, '2023-06-15'),
+('N006', 'B001', 5, 15000, '2023-06-15'),
+('N007', 'B001', 5, 15000, '2023-06-15'),
+('N008', 'B001', 5, 15000, '2023-06-15'),
+('N009', 'B010', 2, 1000, '2023-06-15');
 
 --
 -- Triggers `nota`
@@ -142,15 +162,16 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_barang`, `id_kategori`, `nama_barang`, `stok`, `harga_jual`, `harga_beli`) VALUES
-('B001', 'K001', 'Pensil', 25, '3000', '1500'),
-('B002', 'K001', 'Buku', 19, '4000', '2900'),
-('B003', 'K002', 'Kripik Singkong', 12, '5000', '3000'),
-('B004', 'K002', 'Roti', 20, '2000', '1500'),
+('B001', 'K001', 'Pensil', 10, '3000', '1500'),
+('B002', 'K001', 'pulpen', 19, '4000', '2900'),
+('B003', 'K002', 'Kripik Singkong', 10, '5000', '3000'),
+('B004', 'K002', 'Roti', 19, '2000', '1500'),
 ('B005', 'K003', 'Mie', 19, '3000', '5000'),
 ('B006', 'K003', 'Nasi Kuning', 15, '10000', '8000'),
 ('B007', 'K004', 'Air Putih', 18, '3000', '5000'),
 ('B008', 'K004', 'Kopi', 12, '3000', '1500'),
-('B009', 'K004', 'milku', 20, '5000', '3000');
+('B009', 'K004', 'susu', 20, '5000', '3000'),
+('B010', 'K002', 'kacang garuda', 10, '500', '1000');
 
 --
 -- Triggers `produk`
