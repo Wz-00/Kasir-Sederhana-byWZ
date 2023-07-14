@@ -49,7 +49,7 @@
                             <td>
                                 <a href="index.php?page=barang/edit&id_barang=<?= $row['id_barang'] ?>">Edit</a> | <a
                                     href="index.php?page=barang/delete&id_barang=<?= $row['id_barang'] ?>"
-                                    onclick="javascript:return confirm('Hapus Data member ?');">Delete</a>
+                                    onclick="javascript:return confirm('Hapus Data Produk ?');">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>
