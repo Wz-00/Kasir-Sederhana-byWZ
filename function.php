@@ -226,7 +226,16 @@ function kurangiStokBarang()
         mysqli_query($conn, $query_update_stok);
     }
 }
+function getKategori($id_kategori)
+{
+    global $conn;
 
+    $query = "SELECT * FROM kategori WHERE id_kategori = '$id_kategori'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
+    return $row;
+}
 
 
 ?>
